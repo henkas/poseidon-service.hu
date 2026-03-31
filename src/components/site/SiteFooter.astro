@@ -1,0 +1,13 @@
+---
+import type { LocaleContent } from "../../data/site";
+
+interface Props {
+  content: LocaleContent;
+}
+
+const { content } = Astro.props;
+---
+
+<footer class="site-footer">
+  <p>{content.footer}</p>
+</footer>

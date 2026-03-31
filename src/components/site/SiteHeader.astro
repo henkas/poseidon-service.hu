@@ -1,0 +1,56 @@
+---
+import type { Locale, LocaleContent } from "../../data/site";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import ThemeSwitcher from "./ThemeSwitcher.astro";
+
+interface Props {
+  locale: Locale;
+  content: LocaleContent;
+}
+
+const { locale, content } = Astro.props;
+
+const brandHref = locale === "hu" ? "/" : "/en/";
+const brandTagline =
+  locale === "hu" ? "Professzionális takarítás" : "Professional cleaning services";
+const navigationLabel = locale === "hu" ? "Fő navigáció" : "Main navigation";
+---
+
+<header class="site-header">
+  <div class="brand-block">
+    <a class="brand" href={brandHref}>
+      <span class="brand-mark">PS</span>
+      <span>
+        <strong>Poseidon Service Kft.</strong>
+        <small>{brandTagline}</small>
+      </span>
+    </a>
+  </div>
+
+  <nav class="main-nav" aria-label={navigationLabel}>
+    {content.nav.map((item) => (
+      <a href={item.href}>{item.label}</a>
+    ))}
+  </nav>
+
+  <div class="site-header-controls">
+    <LanguageSwitcher content={content} />
+    <ThemeSwitcher content={content} />
+  </div>
+</header>
+
+<style>
+  .site-header-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 760px) {
+    .site-header-controls {
+      justify-content: flex-start;
+    }
+  }
+</style>

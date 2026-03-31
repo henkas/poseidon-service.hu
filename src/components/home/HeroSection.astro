@@ -1,0 +1,44 @@
+---
+import type { LocaleContent } from "../../data/site";
+
+interface Props {
+  content: LocaleContent;
+  servicesId: string;
+  contactId: string;
+}
+
+const { content, servicesId, contactId } = Astro.props;
+---
+
+<section class="hero-section">
+  <div class="hero-copy">
+    <p class="eyebrow">{content.hero.eyebrow}</p>
+    <h1>{content.hero.title}</h1>
+    <p class="hero-text">{content.hero.subtitle}</p>
+
+    <div class="hero-actions">
+      <a class="button button-primary" href={`#${contactId}`}>{content.hero.primaryCta}</a>
+      <a class="button button-secondary" href={`#${servicesId}`}>{content.hero.secondaryCta}</a>
+    </div>
+
+    <div class="hero-stats">
+      {content.hero.stats.map((item) => (
+        <div class="stat-card">
+          <strong>{item.value}</strong>
+          <span>{item.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <figure class="hero-main-image">
+      <img src="/images/image11.jpg" alt="Professional cleaner at work" loading="eager" />
+    </figure>
+
+    <div class="hero-side-grid">
+      <img src="/images/image05.jpg" alt="Floor cleaning machine in use" />
+      <img src="/images/image03.jpg" alt="Cleaning large windows" />
+    </div>
+  </div>
+</section>

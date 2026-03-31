@@ -1,0 +1,114 @@
+---
+import type { LocaleContent } from "../../data/site";
+
+interface Props {
+  content: LocaleContent;
+  id: string;
+}
+
+const { content, id } = Astro.props;
+---
+
+<section class="section contact-section" id={id}>
+  <div class="contact-layout">
+    <div class="contact-copy">
+      <p class="eyebrow">{content.contact.kicker}</p>
+      <h2>{content.contact.title}</h2>
+      <p>{content.contact.intro}</p>
+
+      <div class="contact-details">
+        <div>
+          <h3>{content.contact.addressLabel}</h3>
+          <p>{content.contact.address}</p>
+          <p>{content.contact.officeNote}</p>
+        </div>
+        <div>
+          <h3>{content.contact.emailLabel}</h3>
+          <p><a href="mailto:info@poseidon-service.hu">info@poseidon-service.hu</a></p>
+        </div>
+        <div>
+          <h3>{content.contact.socialLabel}</h3>
+          <p>
+            <a href="https://www.facebook.com/poseidonservice" target="_blank" rel="noreferrer">
+              {content.contact.socialText}
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div class="people-grid">
+        {content.contact.people.map((person) => (
+          <article class="person-card">
+            <h3>{person.name}</h3>
+            <p>{person.role}</p>
+            <a href={`tel:${person.phone.replace(/\s+/g, "")}`}>{person.phone}</a>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div class="contact-form-card">
+      <h3>{content.contact.formTitle}</h3>
+      <p>{content.contact.formIntro}</p>
+      <form
+        class="contact-form"
+        data-mail-form
+        data-mailto-subject={content.contact.mailtoSubject}
+        data-label-name={content.contact.mailBodyLabels.name}
+        data-label-company={content.contact.mailBodyLabels.company}
+        data-label-email={content.contact.mailBodyLabels.email}
+        data-label-phone={content.contact.mailBodyLabels.phone}
+        data-label-message={content.contact.mailBodyLabels.message}
+      >
+        <label>
+          <span>{content.contact.formLabels.name}</span>
+          <input name="name" type="text" required />
+        </label>
+        <label>
+          <span>{content.contact.formLabels.company}</span>
+          <input name="company" type="text" />
+        </label>
+        <label>
+          <span>{content.contact.formLabels.email}</span>
+          <input name="email" type="email" required />
+        </label>
+        <label>
+          <span>{content.contact.formLabels.phone}</span>
+          <input name="phone" type="tel" />
+        </label>
+        <label>
+          <span>{content.contact.formLabels.message}</span>
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <button class="button button-primary" type="submit">{content.contact.formLabels.submit}</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const forms = document.querySelectorAll("[data-mail-form]");
+
+  forms.forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const formElement = form as HTMLFormElement;
+      const formData = new FormData(formElement);
+      const subject = formElement.getAttribute("data-mailto-subject") || "";
+      const lines = [
+        `${formElement.getAttribute("data-label-name")}: ${formData.get("name") || ""}`,
+        `${formElement.getAttribute("data-label-company")}: ${formData.get("company") || ""}`,
+        `${formElement.getAttribute("data-label-email")}: ${formData.get("email") || ""}`,
+        `${formElement.getAttribute("data-label-phone")}: ${formData.get("phone") || ""}`,
+        "",
+        `${formElement.getAttribute("data-label-message")}:`,
+        `${formData.get("message") || ""}`
+      ];
+      const body = encodeURIComponent(lines.join("\n"));
+      const href = `mailto:info@poseidon-service.hu?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+      window.location.href = href;
+    });
+  });
+</script>

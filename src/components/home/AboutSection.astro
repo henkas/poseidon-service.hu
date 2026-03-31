@@ -1,0 +1,27 @@
+---
+import type { LocaleContent } from "../../data/site";
+
+interface Props {
+  content: LocaleContent;
+  id: string;
+}
+
+const { content, id } = Astro.props;
+---
+
+<section class="section about-section" id={id}>
+  <div class="section-heading">
+    <p class="eyebrow">{content.about.kicker}</p>
+    <h2>{content.about.title}</h2>
+    <p>{content.about.intro}</p>
+  </div>
+
+  <div class="about-grid">
+    {content.about.cards.map((card) => (
+      <article class="info-card">
+        <h3>{card.title}</h3>
+        <p>{card.text}</p>
+      </article>
+    ))}
+  </div>
+</section>

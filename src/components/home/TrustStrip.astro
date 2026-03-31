@@ -1,0 +1,35 @@
+---
+import type { LocaleContent } from "../../data/site";
+
+interface Props {
+  content: LocaleContent;
+}
+
+const { content } = Astro.props;
+---
+
+<section class="section trust-strip" aria-label={content.trustStrip.kicker}>
+  <div class="section-heading">
+    <p class="eyebrow">{content.trustStrip.kicker}</p>
+  </div>
+
+  <div class="trust-strip-items">
+    {content.trustStrip.items.map((item) => (
+      <span class="stat-card trust-strip-item">{item}</span>
+    ))}
+  </div>
+</section>
+
+<style>
+  .trust-strip-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .trust-strip-item {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+  }
+</style>

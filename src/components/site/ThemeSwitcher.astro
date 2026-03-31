@@ -1,0 +1,31 @@
+---
+import type { LocaleContent } from "../../data/site";
+
+interface Props {
+  content: LocaleContent;
+}
+
+const { content } = Astro.props;
+---
+
+<div class="theme-switcher" role="group" aria-label={content.themeToggle.label}>
+  <button class="button button-secondary theme-switcher-button" type="button" data-theme-value="light">
+    {content.themeToggle.light}
+  </button>
+  <button class="button button-secondary theme-switcher-button" type="button" data-theme-value="dark">
+    {content.themeToggle.dark}
+  </button>
+</div>
+
+<style>
+  .theme-switcher {
+    display: inline-flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .theme-switcher-button {
+    min-height: 42px;
+    padding-inline: 16px;
+  }
+</style>
