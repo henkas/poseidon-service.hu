@@ -821,7 +821,6 @@ html[data-theme="dark"] .theme-switcher-button[data-theme-value="dark"] {
   }
 
   .partner-card {
-    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
   }
 }

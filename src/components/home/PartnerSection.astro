@@ -53,6 +53,16 @@ const { content } = Astro.props;
   .partner-card .button {
     flex-shrink: 0;
     white-space: nowrap;
+    background: linear-gradient(135deg, #0c4f72 0%, #0e6984 52%, #1ea4a0 100%);
+    border-color: rgba(12, 79, 114, 0.22);
+    color: #f9fdff;
+    box-shadow: 0 14px 28px rgba(8, 45, 67, 0.18);
+  }
+
+  .partner-card .button:hover,
+  .partner-card .button:focus-visible {
+    background: linear-gradient(135deg, #0b4768 0%, #0d6179 52%, #1a9895 100%);
+    color: #ffffff;
   }
 
   @media (max-width: 600px) {
@@ -60,6 +70,11 @@ const { content } = Astro.props;
       flex-direction: column;
       align-items: stretch;
       padding: 1.25rem 1.5rem;
+    }
+
+    .partner-card h3,
+    .partner-card .button {
+      white-space: normal;
     }
   }
 </style>
