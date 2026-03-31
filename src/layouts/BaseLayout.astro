@@ -1,5 +1,5 @@
 ---
-import { getThemeBootstrapScript, THEME_STORAGE_KEY } from "../lib/theme";
+import { getThemeBootstrapScript } from "../lib/theme";
 
 interface Props {
   lang: string;
@@ -28,29 +28,6 @@ const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
   </head>
   <body>
     <slot />
-    <script is:inline set:html={`
-      (() => {
-        const storageKey = ${JSON.stringify(THEME_STORAGE_KEY)};
-
-        document.querySelectorAll("[data-theme-value]").forEach((button) => {
-          button.addEventListener("click", () => {
-            const theme = button.dataset.themeValue;
-
-            if (!theme) {
-              return;
-            }
-
-            try {
-              localStorage.setItem(storageKey, theme);
-            } catch (_error) {
-              // Ignore storage failures and still apply the selected theme.
-            }
-
-            document.documentElement.dataset.theme = theme;
-          });
-        });
-      })();
-    `} />
   </body>
 </html>
 
