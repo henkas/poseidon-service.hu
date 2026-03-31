@@ -41,6 +41,10 @@ export type LocaleContent = {
     secondaryCta: string;
     stats: Array<{ value: string; label: string }>;
   };
+  heroImages: {
+    main: { src: string; alt: string };
+    side: Array<{ src: string; alt: string }>;
+  };
   trustStrip: {
     kicker: string;
     items: string[];
@@ -61,6 +65,8 @@ export type LocaleContent = {
     kicker: string;
     title: string;
     note: string;
+    serviceHeader: string;
+    priceHeader: string;
     rows: PriceRow[];
   };
   references: {
@@ -168,6 +174,13 @@ export const siteContent: Record<Locale, LocaleContent> = {
         { value: "24 órán belül", label: "válasz munkanapokon" }
       ]
     },
+    heroImages: {
+      main: { src: "/images/image11.jpg", alt: "Professzionális takarító munkában" },
+      side: [
+        { src: "/images/image05.jpg", alt: "Gépi padlótisztítás" },
+        { src: "/images/image03.jpg", alt: "Nagy üvegfelületek tisztítása" }
+      ]
+    },
     trustStrip: {
       kicker: "Megbízóink köre",
       items: ["egészségügy", "ipari csarnokok", "logisztika", "irodaházak", "kereskedelem"]
@@ -228,6 +241,8 @@ export const siteContent: Record<Locale, LocaleContent> = {
       kicker: "Áraink",
       title: "Átlátható irányárak, pontos ajánlat személyes felmérés után.",
       note: "Személyes felmérés és részletes ajánlat kéréséhez keressen minket telefonon vagy emailben.",
+      serviceHeader: "Szolgáltatás",
+      priceHeader: "Ár",
       rows: [
         { service: "Általános nagytakarítás", price: "300 – 1 000 Ft / m²" },
         { service: "Gépi padlósúrolás", price: "100 Ft / m²-től" },
@@ -331,6 +346,13 @@ export const siteContent: Record<Locale, LocaleContent> = {
         { value: "Within 24h", label: "weekday response time" }
       ]
     },
+    heroImages: {
+      main: { src: "/images/image11.jpg", alt: "Professional cleaner at work" },
+      side: [
+        { src: "/images/image05.jpg", alt: "Floor cleaning machine in use" },
+        { src: "/images/image03.jpg", alt: "Cleaning large windows" }
+      ]
+    },
     trustStrip: {
       kicker: "Trusted by",
       items: ["healthcare", "industrial halls", "logistics", "office buildings", "retail"]
@@ -391,6 +413,8 @@ export const siteContent: Record<Locale, LocaleContent> = {
       kicker: "Pricing",
       title: "Indicative pricing with tailored quotes after a site visit.",
       note: "Contact us by phone or email for a personal survey and a detailed quotation.",
+      serviceHeader: "Service",
+      priceHeader: "Price",
       rows: [
         { service: "Deep cleaning", price: "HUF 300 – 1,000 / m²" },
         { service: "Machine floor scrubbing", price: "From HUF 100 / m²" },
@@ -460,14 +484,5 @@ export const siteContent: Record<Locale, LocaleContent> = {
     footer: "© Poseidon Service Kft. All rights reserved."
   }
 };
-
-export const galleryImages = [
-  { src: "/images/image01.jpg", alt: "Cleaning staff maintaining a bright interior space" },
-  { src: "/images/image02.jpg", alt: "Professional cleaning in a modern office environment" },
-  { src: "/images/image03.jpg", alt: "Worker cleaning large glass surfaces" },
-  { src: "/images/image04.jpg", alt: "Detailed cleaning work with protective equipment" },
-  { src: "/images/image05.jpg", alt: "Machine-assisted floor cleaning" },
-  { src: "/images/image06.jpg", alt: "Commercial interior prepared after cleaning" }
-];
 
 export default siteContent;

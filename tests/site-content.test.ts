@@ -66,5 +66,15 @@ describe("site content", () => {
 
     expect(siteContent.hu.hero.title).toMatch(/vállalat|létesítmény|intézmény/i);
     expect(siteContent.en.hero.title).toMatch(/industrial|office|healthcare|facility/i);
+
+    expect(siteContent.hu.heroImages.main.alt).toBeTruthy();
+    expect(siteContent.en.heroImages.main.alt).toBeTruthy();
+    expect(siteContent.hu.heroImages.side).toHaveLength(2);
+    expect(siteContent.en.heroImages.side).toHaveLength(2);
+
+    expect(siteContent.hu.pricing.serviceHeader).toBeTruthy();
+    expect(siteContent.hu.pricing.priceHeader).toBeTruthy();
+    expect(siteContent.en.pricing.serviceHeader).toBeTruthy();
+    expect(siteContent.en.pricing.priceHeader).toBeTruthy();
   });
 });
