@@ -1,4 +1,6 @@
 ---
+import { getThemeBootstrapScript } from "../lib/theme";
+
 interface Props {
   lang: string;
   title: string;
@@ -6,6 +8,7 @@ interface Props {
 }
 
 const { lang, title, description } = Astro.props;
+const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
 ---
 
 <!doctype html>
@@ -13,9 +16,19 @@ const { lang, title, description } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={new URL(Astro.url.pathname, siteOrigin).href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === "hu" ? "hu_HU" : "en_GB"} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, siteOrigin)} />
+    <link rel="alternate" hreflang="hu" href={new URL("/", siteOrigin)} />
+    <link rel="alternate" hreflang="en" href={new URL("/en/", siteOrigin)} />
+    <link rel="alternate" hreflang="x-default" href={new URL("/", siteOrigin)} />
+    <script is:inline set:html={getThemeBootstrapScript()} />
     <title>{title}</title>
   </head>
   <body>
@@ -25,5 +38,6 @@ const { lang, title, description } = Astro.props;
 
 <style is:global>
   @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap");
+  @import "../styles/tokens.css";
   @import "../styles/global.css";
 </style>

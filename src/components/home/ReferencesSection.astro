@@ -1,0 +1,31 @@
+---
+import type { LocaleContent } from "../../data/site";
+
+interface Props {
+  content: LocaleContent;
+  id: string;
+}
+
+const { content, id } = Astro.props;
+---
+
+<section class="section references-section" id={id}>
+  <div class="section-heading">
+    <p class="eyebrow">{content.references.kicker}</p>
+    <h2>{content.references.title}</h2>
+    <p>{content.references.intro}</p>
+  </div>
+
+  <div class="reference-groups">
+    {content.references.groups.map((group) => (
+      <article class="reference-card">
+        <h3>{group.title}</h3>
+        <ul>
+          {group.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </article>
+    ))}
+  </div>
+</section>

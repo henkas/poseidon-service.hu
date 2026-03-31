@@ -1,0 +1,37 @@
+---
+import type { LocaleContent } from "../../data/site";
+
+interface Props {
+  content: LocaleContent;
+}
+
+const { content } = Astro.props;
+---
+
+<div class="theme-switcher" role="group" aria-label={content.themeToggle.label}>
+  <button class="button button-secondary theme-switcher-button" type="button" data-theme-value="light">
+    {content.themeToggle.light}
+  </button>
+  <button class="button button-secondary theme-switcher-button" type="button" data-theme-value="dark">
+    {content.themeToggle.dark}
+  </button>
+</div>
+
+<script>
+  import { THEME_STORAGE_KEY } from "../../lib/theme";
+
+  document.querySelectorAll<HTMLButtonElement>("[data-theme-value]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const theme = button.dataset.themeValue;
+      if (!theme) return;
+
+      try {
+        localStorage.setItem(THEME_STORAGE_KEY, theme);
+      } catch (error) {
+        console.warn("[poseidon] Could not save theme preference:", error);
+      }
+
+      document.documentElement.dataset.theme = theme;
+    });
+  });
+</script>

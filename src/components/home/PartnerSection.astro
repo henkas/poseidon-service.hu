@@ -1,0 +1,37 @@
+---
+import type { LocaleContent } from "../../data/site";
+
+interface Props {
+  content: LocaleContent;
+}
+
+const { content } = Astro.props;
+---
+
+<section class="section partner-section">
+  <div class="section-heading">
+    <p class="eyebrow">{content.partnerCompany.kicker}</p>
+    <h2>{content.partnerCompany.title}</h2>
+    <p>{content.partnerCompany.intro}</p>
+  </div>
+
+  <article class="reference-card partner-card">
+    <h3>{content.partnerCompany.name}</h3>
+    <a
+      class="button button-secondary"
+      href={content.partnerCompany.href}
+      target="_blank"
+      rel="noreferrer"
+    >
+      {content.partnerCompany.cta}
+    </a>
+  </article>
+</section>
+
+<style>
+  .partner-card {
+    display: grid;
+    gap: 16px;
+    align-items: start;
+  }
+</style>

@@ -16,3 +16,11 @@ Static bilingual marketing site for Poseidon Service Kft., rebuilt from the scra
 - TypeScript configuration via Astro strict tsconfig
 - Custom CSS
 - Static output suitable for Cloudflare Pages
+
+## Cloudflare Pages Notes
+
+- Build command: `npm run build`
+- Astro must use the Cloudflare adapter for Pages deployment and runtime request handling.
+- Locale detection depends on the `CF-IPCountry` request header provided by Cloudflare.
+- The persisted locale cookie name is `poseidon_locale`.
+- The persisted theme storage key is `poseidon_theme`.
