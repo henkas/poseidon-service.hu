@@ -1,4 +1,6 @@
 ---
+import { getThemeBootstrapScript, THEME_STORAGE_KEY } from "../lib/theme";
+
 interface Props {
   lang: string;
   title: string;
@@ -13,13 +15,38 @@ const { lang, title, description } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <script is:inline set:html={getThemeBootstrapScript()} />
     <title>{title}</title>
   </head>
   <body>
     <slot />
+    <script is:inline set:html={`
+      (() => {
+        const storageKey = ${JSON.stringify(THEME_STORAGE_KEY)};
+
+        document.querySelectorAll("[data-theme-value]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const theme = button.dataset.themeValue;
+
+            if (!theme) {
+              return;
+            }
+
+            try {
+              localStorage.setItem(storageKey, theme);
+            } catch (_error) {
+              // Ignore storage failures and still apply the selected theme.
+            }
+
+            document.documentElement.dataset.theme = theme;
+          });
+        });
+      })();
+    `} />
   </body>
 </html>
 
