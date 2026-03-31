@@ -7,8 +7,6 @@ interface Props {
 }
 
 const { content, id } = Astro.props;
-const serviceColumnLabel = content.lang === "hu" ? "Szolgáltatás" : "Service";
-const priceColumnLabel = content.lang === "hu" ? "Ár" : "Price";
 ---
 
 <section class="section pricing-section" id={id}>
@@ -22,8 +20,8 @@ const priceColumnLabel = content.lang === "hu" ? "Ár" : "Price";
     <table class="pricing-table">
       <thead>
         <tr>
-          <th>{serviceColumnLabel}</th>
-          <th>{priceColumnLabel}</th>
+          <th>{content.pricing.serviceHeader}</th>
+          <th>{content.pricing.priceHeader}</th>
         </tr>
       </thead>
       <tbody>
