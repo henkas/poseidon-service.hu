@@ -13,11 +13,11 @@ const { content } = Astro.props;
     <p class="eyebrow">{content.trustStrip.kicker}</p>
   </div>
 
-  <div class="trust-strip-items">
+  <ul class="trust-strip-items" role="list">
     {content.trustStrip.items.map((item) => (
-      <span class="stat-card trust-strip-item">{item}</span>
+      <li class="stat-card trust-strip-item">{item}</li>
     ))}
-  </div>
+  </ul>
 </section>
 
 <style>
@@ -25,6 +25,9 @@ const { content } = Astro.props;
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   .trust-strip-item {
