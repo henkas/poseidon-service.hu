@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
+  getLocaleCookie,
+  localeCookieValue,
   normalizeLocaleCookie,
   resolveLocaleRequest
 } from "../src/lib/locale-routing";
@@ -10,6 +12,21 @@ describe("normalizeLocaleCookie", () => {
     expect(normalizeLocaleCookie("en")).toBe("en");
     expect(normalizeLocaleCookie(null)).toBeUndefined();
     expect(normalizeLocaleCookie("fr")).toBeUndefined();
+  });
+});
+
+describe("middleware-facing locale cookie helpers", () => {
+  it("reads poseidon_locale=en from a cookie header string", () => {
+    const headers = new Headers({
+      cookie: "session=abc; poseidon_locale=en; theme=dark"
+    });
+
+    expect(getLocaleCookie(headers)).toBe("en");
+  });
+
+  it("formats a locale cookie value for set-cookie", () => {
+    expect(localeCookieValue("hu")).toContain("poseidon_locale=hu");
+    expect(localeCookieValue("hu")).toContain("Path=/");
   });
 });
 

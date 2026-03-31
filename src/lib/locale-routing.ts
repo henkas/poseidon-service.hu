@@ -1,5 +1,7 @@
 export type Locale = "hu" | "en";
 
+export const LOCALE_COOKIE_NAME = "poseidon_locale";
+
 const BOT_PATTERN = /bot|crawler|spider|slurp|bingpreview/i;
 
 export function normalizeLocaleCookie(value: string | null): Locale | undefined {
@@ -8,6 +10,30 @@ export function normalizeLocaleCookie(value: string | null): Locale | undefined 
   }
 
   return undefined;
+}
+
+export function getLocaleCookie(headers: Headers): Locale | null {
+  const header = headers.get("cookie");
+
+  if (!header) {
+    return null;
+  }
+
+  for (const pair of header.split(";")) {
+    const [rawName, ...rawValue] = pair.trim().split("=");
+
+    if (rawName !== LOCALE_COOKIE_NAME) {
+      continue;
+    }
+
+    return normalizeLocaleCookie(rawValue.join("=") || null) ?? null;
+  }
+
+  return null;
+}
+
+export function localeCookieValue(locale: Locale): string {
+  return `${LOCALE_COOKIE_NAME}=${locale}; Path=/; Max-Age=31536000; SameSite=Lax`;
 }
 
 export function resolveLocaleRequest(input: {
