@@ -8,6 +8,7 @@ describe("normalizeLocaleCookie", () => {
   it("accepts only hu and en", () => {
     expect(normalizeLocaleCookie("hu")).toBe("hu");
     expect(normalizeLocaleCookie("en")).toBe("en");
+    expect(normalizeLocaleCookie(null)).toBeUndefined();
     expect(normalizeLocaleCookie("fr")).toBeUndefined();
   });
 });
@@ -17,9 +18,9 @@ describe("resolveLocaleRequest", () => {
     expect(
       resolveLocaleRequest({
         pathname: "/en/",
-        country: "HU",
-        cookieLocale: undefined,
-        userAgent: "Mozilla/5.0"
+        country: null,
+        cookieLocale: null,
+        userAgent: null
       })
     ).toEqual({ locale: "en", redirectTo: null });
   });
@@ -29,8 +30,8 @@ describe("resolveLocaleRequest", () => {
       resolveLocaleRequest({
         pathname: "/",
         country: "US",
-        cookieLocale: undefined,
-        userAgent: "Mozilla/5.0"
+        cookieLocale: null,
+        userAgent: null
       })
     ).toEqual({ locale: "en", redirectTo: "/en/" });
   });
@@ -40,7 +41,7 @@ describe("resolveLocaleRequest", () => {
       resolveLocaleRequest({
         pathname: "/",
         country: "US",
-        cookieLocale: undefined,
+        cookieLocale: null,
         userAgent: "Googlebot/2.1"
       })
     ).toEqual({ locale: "hu", redirectTo: null });
@@ -52,18 +53,20 @@ describe("resolveLocaleRequest", () => {
         pathname: "/",
         country: "HU",
         cookieLocale: "en",
-        userAgent: "Mozilla/5.0"
+        userAgent: null
       })
     ).toEqual({ locale: "en", redirectTo: "/en/" });
   });
 
   it("normalizes invalid cookies before routing", () => {
+    expect(normalizeLocaleCookie("fr")).toBeUndefined();
+
     expect(
       resolveLocaleRequest({
         pathname: "/",
         country: "HU",
-        cookieLocale: normalizeLocaleCookie("fr"),
-        userAgent: "Mozilla/5.0"
+        cookieLocale: null,
+        userAgent: null
       })
     ).toEqual({ locale: "hu", redirectTo: null });
   });
