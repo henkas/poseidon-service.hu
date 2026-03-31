@@ -1,0 +1,11 @@
+---
+import HomePage from "../components/HomePage.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteContent } from "../data/site";
+
+const content = siteContent.hu;
+---
+
+<BaseLayout lang={content.lang} title={content.title} description={content.description}>
+  <HomePage locale="hu" content={content} />
+</BaseLayout>

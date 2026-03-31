@@ -1,0 +1,281 @@
+---
+import { galleryImages, type Locale, type LocaleContent } from "../data/site";
+
+interface Props {
+  locale: Locale;
+  content: LocaleContent;
+}
+
+const { locale, content } = Astro.props;
+
+const sectionIds =
+  locale === "hu"
+    ? {
+        about: "rolunk",
+        services: "szolgaltatasok",
+        pricing: "arak",
+        references: "referenciak",
+        contact: "kapcsolat"
+      }
+    : {
+        about: "about",
+        services: "services",
+        pricing: "pricing",
+        references: "references",
+        contact: "contact"
+      };
+---
+
+<div class="page-shell">
+  <header class="site-header">
+    <div class="brand-block">
+      <a class="brand" href={locale === "hu" ? "/" : "/en/"}>
+        <span class="brand-mark">PS</span>
+        <span>
+          <strong>Poseidon Service Kft.</strong>
+          <small>{locale === "hu" ? "Professzionális takarítás" : "Professional cleaning services"}</small>
+        </span>
+      </a>
+    </div>
+    <nav class="main-nav" aria-label={content.languageLabel}>
+      {content.nav.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+    <div class="lang-switcher" aria-label={content.languageLabel}>
+      {content.languageSwitch.map((item) => (
+        <a class:list={["lang-link", { active: item.active }]} href={item.href}>
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="hero-copy">
+        <p class="eyebrow">{content.hero.eyebrow}</p>
+        <h1>{content.hero.title}</h1>
+        <p class="hero-text">{content.hero.subtitle}</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href={`#${sectionIds.contact}`}>{content.hero.primaryCta}</a>
+          <a class="button button-secondary" href={`#${sectionIds.services}`}>{content.hero.secondaryCta}</a>
+        </div>
+        <div class="hero-stats">
+          {content.hero.stats.map((item) => (
+            <div class="stat-card">
+              <strong>{item.value}</strong>
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="hero-visual">
+        <figure class="hero-main-image">
+          <img src="/images/image11.jpg" alt="Professional cleaner at work" loading="eager" />
+        </figure>
+        <div class="hero-side-grid">
+          <img src="/images/image05.jpg" alt="Floor cleaning machine in use" />
+          <img src="/images/image03.jpg" alt="Cleaning large windows" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-section" id={sectionIds.about}>
+      <div class="section-heading">
+        <p class="eyebrow">{content.about.kicker}</p>
+        <h2>{content.about.title}</h2>
+        <p>{content.about.intro}</p>
+      </div>
+      <div class="about-grid">
+        {content.about.cards.map((card) => (
+          <article class="info-card">
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section services-section" id={sectionIds.services}>
+      <div class="section-heading">
+        <p class="eyebrow">{content.services.kicker}</p>
+        <h2>{content.services.title}</h2>
+        <p>{content.services.intro}</p>
+      </div>
+      <div class="services-grid">
+        {content.services.items.map((service) => (
+          <article class="service-card">
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section gallery-section">
+      <div class="section-heading narrow">
+        <p class="eyebrow">{locale === "hu" ? "Munkáink hangulata" : "Work in focus"}</p>
+        <h2>{locale === "hu" ? "Tiszta részletek, rendezett terek." : "Clean details, orderly spaces."}</h2>
+      </div>
+      <div class="gallery-grid">
+        {galleryImages.map((image) => (
+          <figure class="gallery-card">
+            <img src={image.src} alt={image.alt} loading="lazy" />
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section class="section pricing-section" id={sectionIds.pricing}>
+      <div class="section-heading">
+        <p class="eyebrow">{content.pricing.kicker}</p>
+        <h2>{content.pricing.title}</h2>
+        <p>{content.pricing.note}</p>
+      </div>
+      <div class="pricing-table-wrap">
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th>{locale === "hu" ? "Szolgáltatás" : "Service"}</th>
+              <th>{locale === "hu" ? "Ár" : "Price"}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {content.pricing.rows.map((row) => (
+              <tr>
+                <td>{row.service}</td>
+                <td>{row.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section references-section" id={sectionIds.references}>
+      <div class="section-heading">
+        <p class="eyebrow">{content.references.kicker}</p>
+        <h2>{content.references.title}</h2>
+        <p>{content.references.intro}</p>
+      </div>
+      <div class="reference-groups">
+        {content.references.groups.map((group) => (
+          <article class="reference-card">
+            <h3>{group.title}</h3>
+            <ul>
+              {group.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section contact-section" id={sectionIds.contact}>
+      <div class="contact-layout">
+        <div class="contact-copy">
+          <p class="eyebrow">{content.contact.kicker}</p>
+          <h2>{content.contact.title}</h2>
+          <p>{content.contact.intro}</p>
+
+          <div class="contact-details">
+            <div>
+              <h3>{content.contact.addressLabel}</h3>
+              <p>{content.contact.address}</p>
+              <p>{content.contact.officeNote}</p>
+            </div>
+            <div>
+              <h3>{content.contact.emailLabel}</h3>
+              <p><a href="mailto:info@poseidon-service.hu">info@poseidon-service.hu</a></p>
+            </div>
+            <div>
+              <h3>{content.contact.socialLabel}</h3>
+              <p>
+                <a href="https://www.facebook.com/poseidonservice" target="_blank" rel="noreferrer">
+                  {content.contact.socialText}
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div class="people-grid">
+            {content.contact.people.map((person) => (
+              <article class="person-card">
+                <h3>{person.name}</h3>
+                <p>{person.role}</p>
+                <a href={`tel:${person.phone.replace(/\s+/g, "")}`}>{person.phone}</a>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div class="contact-form-card">
+          <h3>{content.contact.formTitle}</h3>
+          <p>{content.contact.formIntro}</p>
+          <form
+            class="contact-form"
+            data-mail-form
+            data-mailto-subject={content.contact.mailtoSubject}
+            data-label-name={content.contact.mailBodyLabels.name}
+            data-label-company={content.contact.mailBodyLabels.company}
+            data-label-email={content.contact.mailBodyLabels.email}
+            data-label-phone={content.contact.mailBodyLabels.phone}
+            data-label-message={content.contact.mailBodyLabels.message}
+          >
+            <label>
+              <span>{content.contact.formLabels.name}</span>
+              <input name="name" type="text" required />
+            </label>
+            <label>
+              <span>{content.contact.formLabels.company}</span>
+              <input name="company" type="text" />
+            </label>
+            <label>
+              <span>{content.contact.formLabels.email}</span>
+              <input name="email" type="email" required />
+            </label>
+            <label>
+              <span>{content.contact.formLabels.phone}</span>
+              <input name="phone" type="tel" />
+            </label>
+            <label>
+              <span>{content.contact.formLabels.message}</span>
+              <textarea name="message" rows="5" required></textarea>
+            </label>
+            <button class="button button-primary" type="submit">{content.contact.formLabels.submit}</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>{content.footer}</p>
+  </footer>
+</div>
+
+<script>
+  const forms = document.querySelectorAll("[data-mail-form]");
+
+  forms.forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const subject = form.getAttribute("data-mailto-subject") || "";
+      const lines = [
+        `${form.getAttribute("data-label-name")}: ${formData.get("name") || ""}`,
+        `${form.getAttribute("data-label-company")}: ${formData.get("company") || ""}`,
+        `${form.getAttribute("data-label-email")}: ${formData.get("email") || ""}`,
+        `${form.getAttribute("data-label-phone")}: ${formData.get("phone") || ""}`,
+        "",
+        `${form.getAttribute("data-label-message")}:`,
+        `${formData.get("message") || ""}`
+      ];
+      const body = encodeURIComponent(lines.join("\n"));
+      const href = `mailto:info@poseidon-service.hu?subject=${encodeURIComponent(subject)}&body=${body}`;
+      window.location.href = href;
+    });
+  });
+</script>
