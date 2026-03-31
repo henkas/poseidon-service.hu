@@ -18,15 +18,22 @@ interface Props {
 
 const { locale, content } = Astro.props;
 
-const [aboutLink, servicesLink, pricingLink, referencesLink, contactLink] = content.nav;
-
-const sectionIds = {
-  about: aboutLink.href.replace(/^#/, ""),
-  services: servicesLink.href.replace(/^#/, ""),
-  pricing: pricingLink.href.replace(/^#/, ""),
-  references: referencesLink.href.replace(/^#/, ""),
-  contact: contactLink.href.replace(/^#/, "")
-};
+const sectionIds =
+  locale === "hu"
+    ? {
+        about: "rolunk",
+        services: "szolgaltatasok",
+        pricing: "arak",
+        references: "referenciak",
+        contact: "kapcsolat"
+      }
+    : {
+        about: "about",
+        services: "services",
+        pricing: "pricing",
+        references: "references",
+        contact: "contact"
+      };
 ---
 
 <div class="page-shell">

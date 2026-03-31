@@ -44,12 +44,15 @@ const activeIndex = Math.max(
 </div>
 
 <script>
-  const localeSwitchLinks = document.querySelectorAll("[data-locale-switch-link]");
+  const localeSwitchLinks = document.querySelectorAll<HTMLAnchorElement>("[data-locale-switch-link]");
 
   localeSwitchLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
+      if (!(event instanceof MouseEvent)) {
+        return;
+      }
+
       if (
-        !(link instanceof HTMLAnchorElement) ||
         event.defaultPrevented ||
         event.button !== 0 ||
         event.metaKey ||

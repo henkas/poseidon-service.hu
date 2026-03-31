@@ -14,6 +14,7 @@ const brandHref = locale === "hu" ? "/" : "/en/";
 const brandTagline =
   locale === "hu" ? "Professzionális takarítás" : "Professional cleaning services";
 const navigationLabel = locale === "hu" ? "Fő navigáció" : "Main navigation";
+const menuLabel = locale === "hu" ? "Menü" : "Menu";
 ---
 
 <header class="site-header">
@@ -27,17 +28,47 @@ const navigationLabel = locale === "hu" ? "Fő navigáció" : "Main navigation";
     </a>
   </div>
 
-  <nav class="main-nav" aria-label={navigationLabel}>
+  <nav class="main-nav site-header-nav" aria-label={navigationLabel}>
     {content.nav.map((item) => (
       <a href={item.href}>{item.label}</a>
     ))}
   </nav>
 
-  <div class="site-header-controls">
+  <div class="site-header-controls site-header-desktop-controls">
     <LanguageSwitcher content={content} />
     <ThemeSwitcher content={content} />
   </div>
+
+  <details class="site-header-mobile-menu">
+    <summary class="button button-secondary site-header-mobile-trigger">{menuLabel}</summary>
+    <div class="site-header-mobile-panel">
+      <nav class="site-header-mobile-nav" aria-label={navigationLabel}>
+        {content.nav.map((item) => (
+          <a href={item.href} data-mobile-menu-link>{item.label}</a>
+        ))}
+      </nav>
+
+      <div class="site-header-mobile-controls">
+        <LanguageSwitcher content={content} />
+        <ThemeSwitcher content={content} />
+      </div>
+    </div>
+  </details>
 </header>
+
+<script>
+  const mobileMenus = document.querySelectorAll<HTMLDetailsElement>(".site-header-mobile-menu");
+
+  mobileMenus.forEach((menu) => {
+    const links = menu.querySelectorAll<HTMLAnchorElement>("[data-mobile-menu-link]");
+
+    links.forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.removeAttribute("open");
+      });
+    });
+  });
+</script>
 
 <style>
   .site-header-controls {
@@ -48,9 +79,71 @@ const navigationLabel = locale === "hu" ? "Fő navigáció" : "Main navigation";
     flex-wrap: wrap;
   }
 
+  .site-header-mobile-menu {
+    display: none;
+    width: 100%;
+  }
+
+  .site-header-mobile-trigger {
+    width: 100%;
+    justify-content: center;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .site-header-mobile-trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .site-header-mobile-panel {
+    display: grid;
+    gap: 16px;
+    margin-top: 12px;
+    padding: 18px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 16px 40px rgba(19, 47, 38, 0.08);
+  }
+
+  .site-header-mobile-nav {
+    display: grid;
+    gap: 10px;
+  }
+
+  .site-header-mobile-nav a {
+    padding: 10px 14px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(23, 49, 41, 0.08);
+  }
+
+  .site-header-mobile-controls {
+    display: grid;
+    gap: 12px;
+  }
+
+  .site-header-mobile-controls :global(.lang-switcher),
+  .site-header-mobile-controls :global(.theme-switcher) {
+    width: 100%;
+  }
+
+  .site-header-mobile-controls :global(.theme-switcher) {
+    justify-content: stretch;
+  }
+
+  .site-header-mobile-controls :global(.theme-switcher-button) {
+    flex: 1;
+  }
+
   @media (max-width: 760px) {
+    .site-header-nav,
     .site-header-controls {
-      justify-content: flex-start;
+      display: none;
+    }
+
+    .site-header-mobile-menu {
+      display: block;
     }
   }
 </style>
