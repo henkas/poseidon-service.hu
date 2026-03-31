@@ -23,7 +23,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   const response = await next();
 
-  if (pathname === "/" || pathname === "/en/" || pathname === "/en") {
+  if ((pathname === "/" || pathname === "/en/" || pathname === "/en") && cookieLocale !== locale) {
     response.headers.append("set-cookie", localeCookieValue(locale));
   }
 
