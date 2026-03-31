@@ -71,14 +71,22 @@ Notes:
 
 - Base palette should move from the current draft's soft green direction to a Poseidon-led blue and teal system inspired by the live site.
 - Use a dark blue / teal hero and header treatment with white or near-white framed content panels below.
+- Support both light and dark theme variants across the current site experience, not only in the hero.
 - Maintain high contrast, with restrained accent use.
 - Typography should feel more corporate and stable than editorial. The live site's utilitarian clarity is the anchor; the redesign adds polish and hierarchy, not softness.
 - Photography should stay real-work focused and support industrial, office, healthcare, and large-facility cleaning contexts.
 
+Theme direction:
+
+- Light mode should remain the design baseline and should feel closest to the approved visual concept.
+- Dark mode should be a fully designed variant of the same system, using deep navy / teal surfaces with adjusted panel, text, border, and accent colors.
+- Both themes must preserve the same information hierarchy, brand seriousness, and B2B tone.
+- Theme scope for this redesign is limited to the current bilingual homepage experience and its shared layout shell on `/` and `/en/`.
+
 ### Header
 
 - Sticky header on desktop and mobile.
-- Clear brand lockup, compact nav, and animated language switcher.
+- Clear brand lockup, compact nav, animated language switcher, and theme switcher.
 - Header should compress cleanly at smaller breakpoints.
 - Mobile nav should feel deliberate and contemporary, not like a default Astro drawer.
 
@@ -100,11 +108,22 @@ Notes:
 - Switching language must navigate to the localized route instead of mutating page state in place.
 - The switcher should be present in both desktop and mobile header contexts.
 
+### Theme switcher
+
+- Place a light / dark mode toggle adjacent to the language switcher in the header on desktop.
+- On mobile, include the same theme toggle in the mobile header or menu header area near the language control.
+- The toggle should feel visually related to the language switcher, but remain distinct so the two controls are not confused.
+- Theme switching should update the UI immediately without a page reload.
+- The chosen theme should persist across page navigation and future visits.
+- On first visit with no saved preference, use system color-scheme preference as the initial runtime theme.
+- A lightweight no-flash bootstrap is acceptable so the correct theme can be applied before visible paint.
+
 ### Motion
 
 - Motion should be purposeful and restrained.
 - Use:
   - header / switcher transitions
+  - theme transition polish that does not feel flashy or slow
   - content reveal on load
   - light hover motion on buttons, cards, and trust elements
 - Avoid heavy parallax, scroll-jacking, or theatrical animation.
@@ -228,9 +247,10 @@ Platform-specific design assumptions:
 
 - The site must remain fully usable on desktop and mobile.
 - Header, switcher, nav, and CTA hierarchy must all work cleanly at narrow widths.
-- Language switcher and navigation must be keyboard accessible.
+- Language switcher, theme switcher, and navigation must be keyboard accessible.
 - Motion should respect reduced-motion preferences.
 - Contrast should remain strong across dark hero sections and light content panels.
+- Both full-site themes must meet contrast and readability expectations.
 
 ## SEO And Metadata
 
@@ -252,6 +272,7 @@ Platform-specific design assumptions:
 - The redesigned homepage clearly feels closer to the live Poseidon brand than the current Astro draft.
 - The hero is more business-focused, image-led, and conversion-oriented.
 - The language switcher is animated, route-based, and usable on both desktop and mobile.
+- The site supports both light and dark mode with a persistent user-controlled toggle placed next to the language switcher on desktop.
 - The page hierarchy favors services, proof, and contact over generic descriptive copy.
 - TOP-CLEAN appears as a later related-company section, not as co-primary branding.
 - The site design is compatible with Cloudflare Pages deployment and first-visit geo-aware locale routing.
@@ -261,6 +282,7 @@ Platform-specific design assumptions:
 These are implementation-level choices, not design blockers:
 
 - whether locale persistence uses a cookie only or cookie plus client-side storage
+- whether theme persistence uses a cookie, local storage, or a coordinated hybrid
 - whether contact remains `mailto`-based or moves to a Cloudflare-backed form handler
 - the exact animation library or whether CSS-only motion is sufficient
 - whether locale entry behavior is implemented in Astro middleware, Cloudflare Pages Functions, or another Cloudflare-compatible request layer
