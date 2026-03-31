@@ -262,15 +262,16 @@ const sectionIds =
   forms.forEach((form) => {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      const formData = new FormData(form);
-      const subject = form.getAttribute("data-mailto-subject") || "";
+      const formElement = form as HTMLFormElement;
+      const formData = new FormData(formElement);
+      const subject = formElement.getAttribute("data-mailto-subject") || "";
       const lines = [
-        `${form.getAttribute("data-label-name")}: ${formData.get("name") || ""}`,
-        `${form.getAttribute("data-label-company")}: ${formData.get("company") || ""}`,
-        `${form.getAttribute("data-label-email")}: ${formData.get("email") || ""}`,
-        `${form.getAttribute("data-label-phone")}: ${formData.get("phone") || ""}`,
+        `${formElement.getAttribute("data-label-name")}: ${formData.get("name") || ""}`,
+        `${formElement.getAttribute("data-label-company")}: ${formData.get("company") || ""}`,
+        `${formElement.getAttribute("data-label-email")}: ${formData.get("email") || ""}`,
+        `${formElement.getAttribute("data-label-phone")}: ${formData.get("phone") || ""}`,
         "",
-        `${form.getAttribute("data-label-message")}:`,
+        `${formElement.getAttribute("data-label-message")}:`,
         `${formData.get("message") || ""}`
       ];
       const body = encodeURIComponent(lines.join("\n"));
