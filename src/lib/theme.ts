@@ -17,7 +17,8 @@ export function getThemeBootstrapScript() {
       } else if (window.matchMedia(darkQuery).matches) {
         theme = "dark";
       }
-    } catch (_error) {
+    } catch (error) {
+      console.warn("[poseidon] localStorage unavailable for theme; using system preference.", error);
       if (window.matchMedia(darkQuery).matches) {
         theme = "dark";
       }
