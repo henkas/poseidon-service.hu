@@ -97,25 +97,25 @@ const menuLabel = locale === "hu" ? "Menü" : "Menu";
 
   .site-header-mobile-panel {
     display: grid;
-    gap: 16px;
-    margin-top: 12px;
-    padding: 18px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.88);
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 16px 40px rgba(19, 47, 38, 0.08);
+    gap: 1rem;
+    margin-top: 0.75rem;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--header-bg) 84%, transparent);
+    border: 1px solid var(--header-border);
+    box-shadow: var(--header-shadow);
   }
 
   .site-header-mobile-nav {
     display: grid;
-    gap: 10px;
+    gap: 0.625rem;
   }
 
   .site-header-mobile-nav a {
-    padding: 10px 14px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.72);
-    border: 1px solid rgba(23, 49, 41, 0.08);
+    padding: 0.625rem 0.875rem;
+    border-radius: var(--radius-xs);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .site-header-mobile-controls {
