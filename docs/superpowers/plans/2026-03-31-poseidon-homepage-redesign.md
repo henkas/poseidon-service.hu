@@ -74,6 +74,7 @@
 - Modify: `package.json`
 - Modify: `package-lock.json`
 - Modify: `astro.config.mjs`
+- Modify: `src/components/HomePage.astro` if a minimal type-only compatibility fix is required for `astro check`
 
 - [ ] **Step 1: Add runtime and test dependencies to `package.json`**
 
@@ -91,6 +92,8 @@
     "astro": "^5.6.1"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.0",
+    "typescript": "^5.8.0",
     "vitest": "^3.0.0"
   }
 }
@@ -105,7 +108,18 @@ Expected: install completes and updates `package-lock.json`
 
 ```ts
 import { describe, expect, it } from "vitest";
-import { resolveLocaleRequest } from "../src/lib/locale-routing";
+import {
+  normalizeLocaleCookie,
+  resolveLocaleRequest
+} from "../src/lib/locale-routing";
+
+describe("normalizeLocaleCookie", () => {
+  it("accepts only hu and en", () => {
+    expect(normalizeLocaleCookie("hu")).toBe("hu");
+    expect(normalizeLocaleCookie("en")).toBe("en");
+    expect(normalizeLocaleCookie("fr")).toBeUndefined();
+  });
+});
 
 describe("resolveLocaleRequest", () => {
   it("keeps explicit /en/ requests on English", () => {
@@ -140,6 +154,17 @@ describe("resolveLocaleRequest", () => {
       })
     ).toEqual({ locale: "hu", redirectTo: null });
   });
+
+  it("prefers the locale cookie over country detection", () => {
+    expect(
+      resolveLocaleRequest({
+        pathname: "/",
+        country: "HU",
+        cookieLocale: "en",
+        userAgent: "Mozilla/5.0"
+      })
+    ).toEqual({ locale: "en", redirectTo: "/en/" });
+  });
 });
 ```
 
@@ -162,12 +187,8 @@ type LocaleRequest = {
 
 const BOT_PATTERN = /bot|crawler|spider|slurp|bingpreview/i;
 
-export function isBotUserAgent(userAgent: string | null): boolean {
-  return userAgent ? BOT_PATTERN.test(userAgent) : false;
-}
-
-export function normalizeLocaleCookie(value: string | null): Locale | null {
-  return value === "hu" || value === "en" ? value : null;
+export function normalizeLocaleCookie(value?: string): Locale | undefined {
+  return value === "hu" || value === "en" ? value : undefined;
 }
 
 export function resolveLocaleRequest(input: LocaleRequest): {
@@ -182,7 +203,7 @@ export function resolveLocaleRequest(input: LocaleRequest): {
     return { locale: "hu", redirectTo: null };
   }
 
-  if (isBotUserAgent(input.userAgent)) {
+  if (BOT_PATTERN.test(input.userAgent ?? "")) {
     return { locale: "hu", redirectTo: null };
   }
 
@@ -222,15 +243,31 @@ export default defineConfig({
 });
 ```
 
-- [ ] **Step 8: Re-run the locale test to verify it passes**
+- [ ] **Step 8: Run `npm run check` and, if needed, apply the smallest type-only fix required by Astro diagnostics**
+
+Allowed example:
+
+```ts
+const formElement = form as HTMLFormElement;
+const formData = new FormData(formElement);
+```
+
+Do not refactor page behavior; only satisfy existing type diagnostics so `npm run check` becomes usable.
+
+- [ ] **Step 9: Re-run the locale test to verify it passes**
 
 Run: `npm run test:unit -- tests/locale-routing.test.ts`
-Expected: PASS with 3 passing tests
+Expected: PASS with the locale test cases green
 
-- [ ] **Step 9: Commit**
+- [ ] **Step 10: Run the full validation command once**
+
+Run: `npm run check`
+Expected: PASS without interactive dependency prompts
+
+- [ ] **Step 11: Commit**
 
 ```bash
-git add package.json package-lock.json astro.config.mjs vitest.config.mjs tests/locale-routing.test.ts src/lib/locale-routing.ts
+git add package.json package-lock.json astro.config.mjs vitest.config.mjs tests/locale-routing.test.ts src/lib/locale-routing.ts src/components/HomePage.astro
 git commit -m "feat: add cloudflare locale routing foundation"
 ```
 
