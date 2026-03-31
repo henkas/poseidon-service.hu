@@ -18,7 +18,9 @@ export function getThemeBootstrapScript() {
         theme = "dark";
       }
     } catch (_error) {
-      theme = defaultTheme;
+      if (window.matchMedia(darkQuery).matches) {
+        theme = "dark";
+      }
     }
 
     document.documentElement.dataset.theme = theme;
