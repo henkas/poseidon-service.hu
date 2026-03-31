@@ -8,6 +8,7 @@ interface Props {
 }
 
 const { lang, title, description } = Astro.props;
+const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
 ---
 
 <!doctype html>
@@ -18,7 +19,10 @@ const { lang, title, description } = Astro.props;
     <meta name="color-scheme" content="light dark" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, siteOrigin)} />
+    <link rel="alternate" hreflang="hu" href={new URL("/", siteOrigin)} />
+    <link rel="alternate" hreflang="en" href={new URL("/en/", siteOrigin)} />
+    <link rel="alternate" hreflang="x-default" href={new URL("/", siteOrigin)} />
     <script is:inline set:html={getThemeBootstrapScript()} />
     <title>{title}</title>
   </head>
