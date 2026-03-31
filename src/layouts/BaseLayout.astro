@@ -18,6 +18,11 @@ const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
     <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={new URL(Astro.url.pathname, siteOrigin).href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === "hu" ? "hu_HU" : "en_GB"} />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={new URL(Astro.url.pathname, siteOrigin)} />
     <link rel="alternate" hreflang="hu" href={new URL("/", siteOrigin)} />
