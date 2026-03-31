@@ -118,6 +118,12 @@ Keep the existing two-locale content model as the source of truth, but evolve th
 - Reuse the current service, pricing, references, and contact datasets where possible
 - Adjust copy emphasis so the top sections speak more directly to larger businesses
 
+Current implementation source of truth:
+
+- localized copy and structured business content live in `src/data/site.ts`
+- homepage layout currently lives in `src/components/HomePage.astro`
+- existing image assets live in `public/images/`
+
 TOP-CLEAN content:
 
 - Add a small, explicit related-company content block
@@ -154,7 +160,17 @@ Recommended persistence behavior:
 - Store the visitor's chosen locale in a cookie.
 - Use the cookie first, then geolocation fallback, then default to English if country data is missing or ambiguous.
 
-This design accepts that `/` remains the Hungarian canonical route while Cloudflare-driven first-visit behavior may redirect some non-Hungarian visitors to `/en/`.
+Routing precedence:
+
+1. Requests to `/en/` always render English and are never geo-redirected.
+2. Requests to `/` from known bots / crawlers render the Hungarian canonical page directly, without geo-based redirect behavior.
+3. Requests to `/` from human visitors use saved locale preference first.
+4. If no preference exists, use Cloudflare country data:
+   - `HU` stays on `/`
+   - any other country redirects to `/en/`
+5. If country data is unavailable, default `/` entry behavior to English for human first-time visits.
+
+This design accepts that `/` remains the Hungarian canonical route while Cloudflare-driven first-visit behavior may redirect some non-Hungarian human visitors to `/en/`.
 
 ## Platform And Deployment Direction
 
