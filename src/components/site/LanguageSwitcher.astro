@@ -99,14 +99,14 @@ const activeIndex = Math.max(
 
   .lang-switcher-enhanced .lang-switcher-pill {
     position: absolute;
-    top: 6px;
-    bottom: 6px;
-    left: 6px;
-    width: calc((100% - 12px) / var(--switcher-count));
-    border-radius: 999px;
-    background: var(--surface-strong);
-    box-shadow: 0 6px 16px rgba(20, 83, 64, 0.1);
+    top: 0.375rem;
+    bottom: 0.375rem;
+    left: 0.375rem;
+    width: calc((100% - 0.75rem) / var(--switcher-count));
+    border-radius: var(--radius-pill);
+    background: var(--toggle-pill);
+    box-shadow: var(--toggle-shadow);
     transform: translateX(calc(100% * var(--switcher-active)));
-    transition: transform 180ms ease;
+    transition: transform var(--motion-base);
   }
 </style>
