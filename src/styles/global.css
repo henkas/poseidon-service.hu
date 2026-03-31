@@ -553,12 +553,7 @@ html[data-theme="dark"] .theme-switcher-button[data-theme-value="dark"] {
 
 .section-heading .eyebrow,
 .contact-copy .eyebrow {
-  color: #0c5e79;
-}
-
-html[data-theme="dark"] .section-heading .eyebrow,
-html[data-theme="dark"] .contact-copy .eyebrow {
-  color: #78d0c8;
+  color: var(--eyebrow-accent);
 }
 
 .section-heading p,
@@ -685,7 +680,7 @@ html[data-theme="dark"] .contact-copy .eyebrow {
 }
 
 .reference-card li::marker {
-  color: #1ea4a0;
+  color: var(--marker-accent);
 }
 
 .partner-section {
@@ -721,13 +716,8 @@ html[data-theme="dark"] .contact-copy .eyebrow {
 
 .contact-copy a,
 .person-card a {
-  color: #0c6c88;
+  color: var(--link-accent);
   font-weight: 800;
-}
-
-html[data-theme="dark"] .contact-copy a,
-html[data-theme="dark"] .person-card a {
-  color: #8fe0da;
 }
 
 .contact-form-card {
@@ -760,10 +750,10 @@ html[data-theme="dark"] .person-card a {
   resize: vertical;
 }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
-  outline: none;
-  border-color: #1ea4a0;
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: 2px solid transparent;
+  border-color: var(--focus-border);
   box-shadow: 0 0 0 4px var(--focus-ring);
 }
 

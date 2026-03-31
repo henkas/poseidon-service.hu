@@ -68,6 +68,10 @@
   --input-bg: rgba(255, 255, 255, 0.92);
   --input-border: rgba(12, 79, 114, 0.18);
   --focus-ring: rgba(30, 164, 160, 0.28);
+  --focus-border: #1ea4a0;
+  --eyebrow-accent: #0c5e79;
+  --link-accent: #0c6c88;
+  --marker-accent: #1ea4a0;
   --image-border: rgba(255, 255, 255, 0.14);
 }
 
@@ -125,5 +129,9 @@ html[data-theme="dark"] {
   --input-bg: rgba(6, 22, 31, 0.82);
   --input-border: rgba(148, 173, 189, 0.18);
   --focus-ring: rgba(120, 208, 200, 0.22);
+  --focus-border: #1ea4a0;
+  --eyebrow-accent: #78d0c8;
+  --link-accent: #8fe0da;
+  --marker-accent: #1ea4a0;
   --image-border: rgba(255, 255, 255, 0.1);
 }
