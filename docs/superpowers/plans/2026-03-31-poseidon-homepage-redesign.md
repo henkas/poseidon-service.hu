@@ -659,6 +659,11 @@ const items = [
 </div>
 ```
 
+Implementation requirement for final behavior:
+
+- Before navigating, the language switcher must set `document.cookie = "poseidon_locale=<target>; Path=/; Max-Age=31536000; SameSite=Lax"` so an intentional switch back to `/` works even when the visitor previously chose English.
+- Keep the visible behavior route-based; do not swap page copy in place.
+
 - [ ] **Step 3: Implement the theme switcher with immediate client-side toggling**
 
 ```astro
