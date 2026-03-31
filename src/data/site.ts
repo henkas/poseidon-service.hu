@@ -28,6 +28,11 @@ export type LocaleContent = {
   nav: Array<{ href: string; label: string }>;
   languageLabel: string;
   languageSwitch: Array<{ href: string; label: string; active: boolean }>;
+  themeToggle: {
+    label: string;
+    light: string;
+    dark: string;
+  };
   hero: {
     eyebrow: string;
     title: string;
@@ -35,6 +40,10 @@ export type LocaleContent = {
     primaryCta: string;
     secondaryCta: string;
     stats: Array<{ value: string; label: string }>;
+  };
+  trustStrip: {
+    kicker: string;
+    items: string[];
   };
   about: {
     kicker: string;
@@ -59,6 +68,14 @@ export type LocaleContent = {
     title: string;
     intro: string;
     groups: ReferenceGroup[];
+  };
+  partnerCompany: {
+    kicker: string;
+    title: string;
+    intro: string;
+    name: string;
+    href: string;
+    cta: string;
   };
   contact: {
     kicker: string;
@@ -133,11 +150,16 @@ export const siteContent: Record<Locale, LocaleContent> = {
       { href: "/", label: "HU", active: true },
       { href: "/en/", label: "EN", active: false }
     ],
+    themeToggle: {
+      label: "Téma",
+      light: "Világos",
+      dark: "Sötét"
+    },
     hero: {
       eyebrow: "Bízza ránk a piszkos munkát",
       title: "Megbízható takarítás vállalatoknak, létesítményeknek és intézményeknek.",
       subtitle:
-        "Debreceni központtal, országos lefedettséggel végzünk napi takarítást, nagytakarítást, gépi padlóápolást és üvegfelület-tisztítást.",
+        "Debreceni központtal, országos lefedettséggel végzünk napi takarítást, nagytakarítást, gépi padlóápolást és üvegfelület-tisztítást vállalati és intézményi környezetben.",
       primaryCta: "Ajánlatkérés",
       secondaryCta: "Szolgáltatásaink",
       stats: [
@@ -146,23 +168,27 @@ export const siteContent: Record<Locale, LocaleContent> = {
         { value: "24 órán belül", label: "válasz munkanapokon" }
       ]
     },
+    trustStrip: {
+      kicker: "Megbízóink köre",
+      items: ["egészségügy", "ipari csarnokok", "logisztika", "irodaházak", "kereskedelem"]
+    },
     about: {
       kicker: "Rólunk",
       title: "Tapasztalat, technológia és folyamatos ellenőrzés.",
       intro:
-        "A 2000-es évek elején kisebb telephelyek és lakások takarításával kezdtük, majd bővülő gépparkkal és csapattal nagyobb ipari, irodai és egészségügyi létesítmények felé léptünk tovább.",
+        "Nagyobb vállalati, intézményi és ipari telephelyek tisztaságát támogatjuk, a munkaszervezést mindig az üzemmenethez igazítva.",
       cards: [
         {
           title: "Kik vagyunk?",
-          text: "Cégünk több mint másfél évtizede végez takarítási feladatokat, a megszerzett tapasztalatot korszerű technológiával ötvözve."
+          text: "Több mint másfél évtizede dolgozunk nagyobb vállalati és intézményi környezetben."
         },
         {
           title: "Mit csinálunk?",
-          text: "Lakások, üzemcsarnokok, ipari létesítmények, irodaházak és egészségügyi intézmények napi és időszakos takarítását vállaljuk."
+          text: "Ipari, irodai, logisztikai és egészségügyi telephelyek napi és időszakos takarítását vállaljuk."
         },
         {
           title: "Miért minket válasszanak?",
-          text: "Az ajánlatadást és a takarítási technológiát a megrendelő működéséhez igazítjuk, a minőséget pedig rendszeres ellenőrzéssel biztosítjuk."
+          text: "Az ajánlatot, a technológiát és az ellenőrzést a megrendelő működéséhez igazítjuk."
         }
       ]
     },
@@ -213,7 +239,7 @@ export const siteContent: Record<Locale, LocaleContent> = {
     },
     references: {
       kicker: "Referenciák",
-      title: "Megbízóink között egészségügyi, ipari és kereskedelmi szereplők is megtalálhatók.",
+      title: "Megbízóink között egészségügyi, ipari, logisztikai és kereskedelmi szereplők is megtalálhatók.",
       intro: "A folyamatos együttműködés és a visszatérő megbízások adják munkánk legerősebb igazolását.",
       groups: [
         {
@@ -225,6 +251,15 @@ export const siteContent: Record<Locale, LocaleContent> = {
           items: sharedReferences.flooring
         }
       ]
+    },
+    partnerCompany: {
+      kicker: "Kapcsolódó márka",
+      title: "TOP-CLEAN 87' Kft.",
+      intro:
+        "A TOP-CLEAN 87' Kft. különálló partnerbrandként támogatja a nagyobb vállalati és intézményi projekteket.",
+      name: "TOP-CLEAN 87' Kft.",
+      href: "https://topclean87kft.hu/",
+      cta: "TOP-CLEAN oldal megnyitása"
     },
     contact: {
       kicker: "Kapcsolat",
@@ -278,11 +313,16 @@ export const siteContent: Record<Locale, LocaleContent> = {
       { href: "/", label: "HU", active: false },
       { href: "/en/", label: "EN", active: true }
     ],
+    themeToggle: {
+      label: "Theme",
+      light: "Light",
+      dark: "Dark"
+    },
     hero: {
       eyebrow: "Leave the dirty work to us",
-      title: "Dependable cleaning for companies, facilities and institutions.",
+      title: "Dependable cleaning for industrial, office, healthcare and facility operators.",
       subtitle:
-        "Based in Debrecen and working nationwide, we provide recurring cleaning, deep cleaning, machine floor scrubbing and glass surface cleaning.",
+        "Based in Debrecen and working nationwide, we provide recurring cleaning, deep cleaning, machine floor scrubbing and glass surface cleaning for larger business and institutional sites.",
       primaryCta: "Request a quote",
       secondaryCta: "View services",
       stats: [
@@ -291,23 +331,27 @@ export const siteContent: Record<Locale, LocaleContent> = {
         { value: "Within 24h", label: "weekday response time" }
       ]
     },
+    trustStrip: {
+      kicker: "Trusted by",
+      items: ["healthcare", "industrial halls", "logistics", "office buildings", "retail"]
+    },
     about: {
       kicker: "About",
       title: "Experience, modern methods and consistent quality control.",
       intro:
-        "We started in the early 2000s with smaller facilities and residential spaces, then expanded with a stronger team and equipment fleet to serve larger industrial, office and healthcare sites.",
+        "We support the cleanliness of larger company, institutional and industrial sites, tailoring the work schedule to the operation.",
       cards: [
         {
           title: "Who we are",
-          text: "For more than 15 years we have been delivering cleaning services built on practical experience and continuously improved methods."
+          text: "For more than 15 years we have worked in larger business and institutional environments."
         },
         {
           title: "What we do",
-          text: "We handle recurring and one-off cleaning for homes, industrial halls, production facilities, office buildings and healthcare institutions."
+          text: "We handle recurring and one-off cleaning for industrial, office, logistics and healthcare sites."
         },
         {
           title: "Why choose us",
-          text: "We tailor both our proposal and cleaning technology to the client's operation and maintain standards through regular checks."
+          text: "We tailor the proposal, technology and checks to the client's operation."
         }
       ]
     },
@@ -358,7 +402,7 @@ export const siteContent: Record<Locale, LocaleContent> = {
     },
     references: {
       kicker: "References",
-      title: "Our client list includes healthcare, industrial and commercial organizations.",
+      title: "Our client list includes healthcare, industrial, logistics and commercial organizations.",
       intro: "Long-term cooperation and repeat assignments remain the clearest proof of our service quality.",
       groups: [
         {
@@ -370,6 +414,15 @@ export const siteContent: Record<Locale, LocaleContent> = {
           items: sharedReferences.flooring
         }
       ]
+    },
+    partnerCompany: {
+      kicker: "Related brand",
+      title: "TOP-CLEAN 87' Kft.",
+      intro:
+        "TOP-CLEAN 87' Kft. supports larger business and institutional projects as a separate partner brand.",
+      name: "TOP-CLEAN 87' Kft.",
+      href: "https://topclean87kft.hu/",
+      cta: "Open TOP-CLEAN"
     },
     contact: {
       kicker: "Contact",
@@ -416,3 +469,5 @@ export const galleryImages = [
   { src: "/images/image05.jpg", alt: "Machine-assisted floor cleaning" },
   { src: "/images/image06.jpg", alt: "Commercial interior prepared after cleaning" }
 ];
+
+export default siteContent;
