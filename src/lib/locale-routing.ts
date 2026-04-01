@@ -1,3 +1,5 @@
+import type { Locale } from "../data/site";
+
 export type { Locale } from "../data/site";
 
 export const LOCALE_COOKIE_NAME = "poseidon_locale";
