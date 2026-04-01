@@ -44,7 +44,26 @@ const activeIndex = Math.max(
 </div>
 
 <script>
+  import { buildLocaleSwitchHref } from "../../lib/language-switching";
+
+  const localeScrollKey = "poseidon_locale_scroll_y";
   const localeSwitchLinks = document.querySelectorAll<HTMLAnchorElement>("[data-locale-switch-link]");
+
+  if (!window.location.hash) {
+    const savedScrollY = window.sessionStorage.getItem(localeScrollKey);
+
+    if (savedScrollY !== null) {
+      const y = Number(savedScrollY);
+
+      if (Number.isFinite(y) && y >= 0) {
+        requestAnimationFrame(() => {
+          window.scrollTo(0, y);
+        });
+      }
+
+      window.sessionStorage.removeItem(localeScrollKey);
+    }
+  }
 
   localeSwitchLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
@@ -70,9 +89,20 @@ const activeIndex = Math.max(
         return;
       }
 
+      const destination = buildLocaleSwitchHref({
+        currentPathname: window.location.pathname,
+        currentHash: window.location.hash,
+        targetHref: href
+      });
+
       event.preventDefault();
       document.cookie = cookieValue;
-      window.location.assign(href);
+
+      if (!window.location.hash) {
+        window.sessionStorage.setItem(localeScrollKey, String(window.scrollY));
+      }
+
+      window.location.assign(destination);
     });
   });
 </script>

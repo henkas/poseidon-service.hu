@@ -9,15 +9,22 @@ const { content } = Astro.props;
 ---
 
 <section class="section partner-section">
-  <div class="section-heading">
-    <p class="eyebrow">{content.partnerCompany.kicker}</p>
-    <h2>{content.partnerCompany.title}</h2>
-    <p>{content.partnerCompany.intro}</p>
-  </div>
+  <article class="reference-card partner-callout">
+    <div class="partner-logo-tile">
+      <img
+        src="/images/top-clean-logo.png"
+        alt={content.partnerCompany.name}
+        width="443"
+        height="422"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
 
-  <article class="reference-card partner-card">
-    <div class="partner-card-copy">
-      <h3>{content.partnerCompany.name}</h3>
+    <div class="partner-callout-copy">
+      <p class="eyebrow">{content.partnerCompany.kicker}</p>
+      <h2>{content.partnerCompany.title}</h2>
+      <p>{content.partnerCompany.intro}</p>
     </div>
 
     <a

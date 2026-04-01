@@ -159,13 +159,16 @@ main > * {
   width: 3rem;
   height: 3rem;
   flex: none;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(120, 208, 200, 0.2)),
-    var(--accent-strong);
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: var(--header-text);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 12px 28px rgba(0, 0, 0, 0.22);
-  color: var(--header-text);
-  font-weight: 800;
-  letter-spacing: 0.12em;
+}
+
+.brand-mark img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
 }
 
 .brand strong,
@@ -689,26 +692,60 @@ html[data-theme="dark"] .theme-switcher-button[data-theme-value="dark"] {
   background: var(--partner-section-bg);
 }
 
-.partner-card {
+.partner-callout {
   display: grid;
-  gap: 1rem;
+  gap: 1.05rem;
   align-items: start;
   min-height: auto;
-  padding: 1.5rem 1.75rem;
+  padding: 1.15rem;
   background: var(--partner-card-bg);
   border-color: var(--partner-section-border);
   overflow: clip;
 }
 
-.partner-card-copy {
+.partner-logo-tile {
+  width: 5.5rem;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  padding: 0.65rem;
+  border-radius: 1rem;
+  background: var(--header-text);
+  border: 1px solid color-mix(in srgb, var(--text-strong) 14%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.66),
+    0 10px 18px rgba(6, 32, 49, 0.14);
+}
+
+.partner-logo-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.partner-callout-copy {
   min-width: 0;
+  display: grid;
+  gap: 0.55rem;
 }
 
-.partner-card-copy h3 {
+.partner-callout-copy .eyebrow {
+  color: var(--eyebrow-accent);
+}
+
+.partner-callout-copy h2 {
   margin-bottom: 0;
+  max-width: none;
+  font-size: clamp(1.35rem, 3.6vw, 2rem);
+  line-height: 1.14;
 }
 
-.partner-card .button-secondary {
+.partner-callout-copy p {
+  color: var(--text-muted);
+  max-width: 52ch;
+}
+
+.partner-callout .button-secondary {
   justify-self: start;
   color: var(--text-strong);
   background: color-mix(in srgb, var(--panel-bg-strong) 90%, transparent);
@@ -845,8 +882,19 @@ html[data-theme="dark"] .theme-switcher-button[data-theme-value="dark"] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .partner-card {
+  .partner-callout {
+    grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
+    gap: 1rem 1.4rem;
+    padding: 1.3rem 1.5rem;
+  }
+
+  .partner-logo-tile {
+    width: 6rem;
+  }
+
+  .partner-callout .button-secondary {
+    justify-self: end;
   }
 }
 

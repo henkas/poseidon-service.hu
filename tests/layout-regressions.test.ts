@@ -17,10 +17,10 @@ describe("homepage layout regressions", () => {
     expect(partnerSection).not.toContain("<style>");
   });
 
-  it("gives the partner card a stable responsive layout and visible CTA styling", () => {
-    expect(globalCss).toContain(".partner-card-copy");
-    expect(globalCss).toContain(".partner-card .button-secondary");
-    expect(globalCss).toContain("grid-template-columns: minmax(0, 1fr) auto;");
+  it("gives the partner callout a stable responsive layout and visible CTA styling", () => {
+    expect(globalCss).toContain(".partner-callout-copy");
+    expect(globalCss).toContain(".partner-callout .button-secondary");
+    expect(globalCss).toContain("grid-template-columns: auto minmax(0, 1fr) auto;");
     expect(globalCss).toContain("min-height: auto;");
   });
 });
