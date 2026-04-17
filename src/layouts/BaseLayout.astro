@@ -1,4 +1,10 @@
 ---
+import "@fontsource/manrope/400.css";
+import "@fontsource/manrope/500.css";
+import "@fontsource/manrope/600.css";
+import "@fontsource/manrope/700.css";
+import "@fontsource/manrope/800.css";
+import "@fontsource-variable/fraunces/index.css";
 import { getThemeBootstrapScript } from "../lib/theme";
 import { buildLocalBusinessJsonLd } from "../lib/structured-data";
 import type { Locale } from "../data/site";
@@ -62,12 +68,6 @@ const jsonLd = buildLocalBusinessJsonLd({
 </html>
 
 <style is:global>
-  @import "@fontsource/manrope/400.css";
-  @import "@fontsource/manrope/500.css";
-  @import "@fontsource/manrope/600.css";
-  @import "@fontsource/manrope/700.css";
-  @import "@fontsource/manrope/800.css";
-  @import "@fontsource-variable/fraunces/index.css";
   @import "../styles/tokens.css";
   @import "../styles/global.css";
 </style>
