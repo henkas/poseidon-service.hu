@@ -8,8 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "test:unit": "vitest run",
-    "check": "astro check && vitest run",
-    "og-image": "node scripts/capture-og-image.mjs"
+    "check": "astro check && vitest run"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.0.0",
@@ -20,7 +19,6 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
-    "playwright": "^1.59.1",
     "typescript": "^5.8.2",
     "vitest": "^3.0.0"
   }
