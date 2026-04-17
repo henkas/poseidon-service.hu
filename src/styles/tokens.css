@@ -1,7 +1,7 @@
 :root {
   color-scheme: light;
   --font-sans: "Manrope", sans-serif;
-  --font-display: "Fraunces", serif;
+  --font-display: "Fraunces Variable", "Fraunces", serif;
   --content-width: 85rem;
   --radius-xs: 0.875rem;
   --radius-sm: 1.125rem;
