@@ -16,16 +16,9 @@ const { content, id } = Astro.props;
     <p>{content.references.intro}</p>
   </div>
 
-  <div class="reference-groups">
-    {content.references.groups.map((group) => (
-      <article class="reference-card">
-        <h3>{group.title}</h3>
-        <ul>
-          {group.items.map((item) => (
-            <li>{item}</li>
-          ))}
-        </ul>
-      </article>
+  <ul class="reference-list" role="list">
+    {content.references.clients.map((client) => (
+      <li class="reference-list-item">{client}</li>
     ))}
-  </div>
+  </ul>
 </section>
