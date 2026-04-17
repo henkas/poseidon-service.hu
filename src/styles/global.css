@@ -111,21 +111,6 @@ main > * {
   min-width: 0;
 }
 
-.site-header,
-.hero-copy,
-.hero-main-image,
-.hero-side-grid img,
-.section,
-.info-card,
-.service-card,
-.reference-card,
-.person-card,
-.contact-form-card,
-.pricing-table-wrap,
-.stat-card {
-  backdrop-filter: blur(16px);
-}
-
 .site-header {
   position: sticky;
   top: var(--header-offset);
