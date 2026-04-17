@@ -3,12 +3,8 @@ import siteContent from "../src/data/site";
 
 describe("site content", () => {
   it("defines the homepage content contract for both locales", () => {
-    expect(siteContent.hu.trustStrip.kicker).toBeTruthy();
-    expect(siteContent.en.trustStrip.kicker).toBeTruthy();
-    expect(siteContent.hu.trustStrip.items.length).toBeGreaterThanOrEqual(3);
-    expect(siteContent.hu.trustStrip.items.length).toBeLessThanOrEqual(5);
-    expect(siteContent.en.trustStrip.items.length).toBeGreaterThanOrEqual(3);
-    expect(siteContent.en.trustStrip.items.length).toBeLessThanOrEqual(5);
+    expect(siteContent.hu.logoStrip.kicker).toBeTruthy();
+    expect(siteContent.en.logoStrip.kicker).toBeTruthy();
 
     expect(siteContent.hu.partnerCompany).toEqual({
       kicker: expect.any(String),
@@ -41,6 +37,8 @@ describe("site content", () => {
     expect(siteContent.en.contact.people).toHaveLength(2);
     expect(siteContent.hu.contact.mailtoSubject).toBeTruthy();
     expect(siteContent.en.contact.mailtoSubject).toBeTruthy();
+    expect(siteContent.hu.contact.pricingNote).toBeTruthy();
+    expect(siteContent.en.contact.pricingNote).toBeTruthy();
     expect(siteContent.hu.contact.formLabels.name).toBeTruthy();
     expect(siteContent.hu.contact.formLabels.company).toBeTruthy();
     expect(siteContent.hu.contact.formLabels.email).toBeTruthy();
@@ -71,10 +69,27 @@ describe("site content", () => {
     expect(siteContent.en.heroImages.main.alt).toBeTruthy();
     expect(siteContent.hu.heroImages.side).toHaveLength(2);
     expect(siteContent.en.heroImages.side).toHaveLength(2);
+    expect(siteContent.hu.heroImages.side[0].src).toBe("/images/image07.jpg");
+    expect(siteContent.en.heroImages.side[0].src).toBe("/images/image07.jpg");
 
-    expect(siteContent.hu.pricing.serviceHeader).toBeTruthy();
-    expect(siteContent.hu.pricing.priceHeader).toBeTruthy();
-    expect(siteContent.en.pricing.serviceHeader).toBeTruthy();
-    expect(siteContent.en.pricing.priceHeader).toBeTruthy();
+    expect(siteContent.hu.references.clients.length).toBeGreaterThanOrEqual(12);
+    expect(siteContent.en.references.clients.length).toBeGreaterThanOrEqual(12);
+    expect(siteContent.hu.references.clients).toContain("Thyssenkrupp Zrt.");
+    expect(siteContent.en.references.clients).toContain("Thyssenkrupp Zrt.");
+    expect(siteContent.hu.references.clients).toContain("Plan-Épszer Kft.");
+    expect(siteContent.en.references.clients).toContain("Plan-Épszer Kft.");
+    expect(siteContent.hu.references.clients).not.toContain("Skála ruházati áruház");
+    expect(siteContent.en.references.clients).not.toContain("Skála ruházati áruház");
+    expect(siteContent.hu.references.clients).not.toContain("Loxon Solutions Zrt.");
+    expect(siteContent.en.references.clients).not.toContain("Loxon Solutions Zrt.");
+
+    expect(siteContent.en.references.clients).toContain("Medicover clinic");
+    expect(siteContent.en.references.clients).toContain("McDonald's restaurants");
+    expect(siteContent.en.references.clients).toContain("Diósgyőri hospital");
+
+    const huNavHrefs = siteContent.hu.nav.map((n) => n.href);
+    const enNavHrefs = siteContent.en.nav.map((n) => n.href);
+    expect(huNavHrefs).not.toContain("#arak");
+    expect(enNavHrefs).not.toContain("#pricing");
   });
 });
