@@ -1,0 +1,31 @@
+---
+import type { LocaleContent } from "../../data/site";
+import { clientLogos } from "../../data/logos";
+
+interface Props {
+  content: LocaleContent;
+}
+
+const { content } = Astro.props;
+---
+
+<section class="section logo-strip" aria-label={content.logoStrip.kicker}>
+  <div class="section-heading">
+    <p class="eyebrow">{content.logoStrip.kicker}</p>
+  </div>
+
+  <ul class="logo-strip-items" role="list">
+    {clientLogos.map((logo) => (
+      <li class="logo-strip-item">
+        <img
+          src={logo.src}
+          alt={logo.name}
+          width={logo.width}
+          height={logo.height}
+          loading="lazy"
+          decoding="async"
+        />
+      </li>
+    ))}
+  </ul>
+</section>

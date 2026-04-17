@@ -1,5 +1,8 @@
 ---
 import type { LocaleContent } from "../../data/site";
+import heroMain from "../../assets/images/image11.jpg";
+import heroSide1 from "../../assets/images/image07.jpg";
+import heroSide2 from "../../assets/images/image03.jpg";
 
 interface Props {
   content: LocaleContent;
@@ -8,6 +11,11 @@ interface Props {
 }
 
 const { content, servicesId, contactId } = Astro.props;
+
+const sideImages = [
+  { asset: heroSide1, alt: content.heroImages.side[0]?.alt ?? "" },
+  { asset: heroSide2, alt: content.heroImages.side[1]?.alt ?? "" }
+];
 ---
 
 <section class="hero-section">
@@ -33,12 +41,27 @@ const { content, servicesId, contactId } = Astro.props;
 
   <div class="hero-visual">
     <figure class="hero-main-image">
-      <img src={content.heroImages.main.src} alt={content.heroImages.main.alt} loading="eager" />
+      <img
+        src={heroMain.src}
+        width={heroMain.width}
+        height={heroMain.height}
+        alt={content.heroImages.main.alt}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
     </figure>
 
     <div class="hero-side-grid">
-      {content.heroImages.side.map((img) => (
-        <img src={img.src} alt={img.alt} loading="lazy" />
+      {sideImages.map((img) => (
+        <img
+          src={img.asset.src}
+          width={img.asset.width}
+          height={img.asset.height}
+          alt={img.alt}
+          loading="lazy"
+          decoding="async"
+        />
       ))}
     </div>
   </div>

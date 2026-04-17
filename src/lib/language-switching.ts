@@ -3,7 +3,6 @@ import type { Locale } from "./locale-routing";
 const HU_TO_EN_HASH: Record<string, string> = {
   rolunk: "about",
   szolgaltatasok: "services",
-  arak: "pricing",
   referenciak: "references",
   kapcsolat: "contact"
 };

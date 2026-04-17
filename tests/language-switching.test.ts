@@ -31,6 +31,8 @@ describe("mapLocaleHash", () => {
 
   it("keeps unknown hashes unchanged", () => {
     expect(mapLocaleHash("#custom-anchor", "hu", "en")).toBe("#custom-anchor");
+    expect(mapLocaleHash("#arak", "hu", "en")).toBe("#arak");
+    expect(mapLocaleHash("#pricing", "en", "hu")).toBe("#pricing");
   });
 });
 

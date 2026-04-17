@@ -5,16 +5,6 @@ type Service = {
   description: string;
 };
 
-type PriceRow = {
-  service: string;
-  price: string;
-};
-
-type ReferenceGroup = {
-  title: string;
-  items: string[];
-};
-
 type ContactPerson = {
   name: string;
   role: string;
@@ -45,10 +35,7 @@ export type LocaleContent = {
     main: { src: string; alt: string };
     side: Array<{ src: string; alt: string }>;
   };
-  trustStrip: {
-    kicker: string;
-    items: string[];
-  };
+  logoStrip: { kicker: string };
   about: {
     kicker: string;
     title: string;
@@ -61,19 +48,11 @@ export type LocaleContent = {
     intro: string;
     items: Service[];
   };
-  pricing: {
-    kicker: string;
-    title: string;
-    note: string;
-    serviceHeader: string;
-    priceHeader: string;
-    rows: PriceRow[];
-  };
   references: {
     kicker: string;
     title: string;
     intro: string;
-    groups: ReferenceGroup[];
+    clients: string[];
   };
   partnerCompany: {
     kicker: string;
@@ -87,6 +66,7 @@ export type LocaleContent = {
     kicker: string;
     title: string;
     intro: string;
+    pricingNote: string;
     addressLabel: string;
     address: string;
     officeNote: string;
@@ -116,28 +96,6 @@ export type LocaleContent = {
   footer: string;
 };
 
-const sharedReferences = {
-  ongoing: [
-    "Medicover klinika",
-    "Eurings Zrt.",
-    "Techszerviz Kft.",
-    "Strabag Zrt.",
-    "Axiál Kft.",
-    "Novochem Kft.",
-    "DHL Express Logisztikai Központ",
-    "Laguna Lux Fürdőszoba Szalon",
-    "Skála ruházati áruház",
-    "Mitor Kft.",
-    "Loxon Solutions Zrt.",
-    "McDonald's éttermek"
-  ],
-  flooring: [
-    "Diósgyőri kórház",
-    "Egyházi rendezvénycsarnok",
-    "Eurings Zrt. Szerszámregeneráló üzem"
-  ]
-};
-
 export const siteContent: Record<Locale, LocaleContent> = {
   hu: {
     lang: "hu",
@@ -147,7 +105,6 @@ export const siteContent: Record<Locale, LocaleContent> = {
     nav: [
       { href: "#rolunk", label: "Rólunk" },
       { href: "#szolgaltatasok", label: "Szolgáltatások" },
-      { href: "#arak", label: "Áraink" },
       { href: "#referenciak", label: "Referenciák" },
       { href: "#kapcsolat", label: "Kapcsolat" }
     ],
@@ -177,14 +134,11 @@ export const siteContent: Record<Locale, LocaleContent> = {
     heroImages: {
       main: { src: "/images/image11.jpg", alt: "Professzionális takarító munkában" },
       side: [
-        { src: "/images/image05.jpg", alt: "Gépi padlótisztítás" },
+        { src: "/images/image07.jpg", alt: "Gépi padlótisztítás" },
         { src: "/images/image03.jpg", alt: "Nagy üvegfelületek tisztítása" }
       ]
     },
-    trustStrip: {
-      kicker: "Megbízóink köre",
-      items: ["egészségügy", "ipari csarnokok", "logisztika", "irodaházak", "kereskedelem"]
-    },
+    logoStrip: { kicker: "Megbízóink köre" },
     about: {
       kicker: "Rólunk",
       title: "Tapasztalat, technológia és folyamatos ellenőrzés.",
@@ -237,41 +191,33 @@ export const siteContent: Record<Locale, LocaleContent> = {
         }
       ]
     },
-    pricing: {
-      kicker: "Áraink",
-      title: "Átlátható irányárak, pontos ajánlat személyes felmérés után.",
-      note: "Személyes felmérés és részletes ajánlat kéréséhez keressen minket telefonon vagy emailben.",
-      serviceHeader: "Szolgáltatás",
-      priceHeader: "Ár",
-      rows: [
-        { service: "Általános nagytakarítás", price: "300 – 1 000 Ft / m²" },
-        { service: "Gépi padlósúrolás", price: "100 Ft / m²-től" },
-        { service: "Folyamatos takarítás", price: "10 – 100 Ft / m² / nap" },
-        { service: "Üvegfelületek tisztítása", price: "80 – 200 Ft / m² / nap" },
-        { service: "Padlózat bevonatolása", price: "Egyedi megbeszélés alapján" },
-        { service: "Üzemeltetés", price: "Egyedi megbeszélés alapján" }
-      ]
-    },
     references: {
       kicker: "Referenciák",
       title: "Megbízóink között egészségügyi, ipari, logisztikai és kereskedelmi szereplők is megtalálhatók.",
       intro: "A folyamatos együttműködés és a visszatérő megbízások adják munkánk legerősebb igazolását.",
-      groups: [
-        {
-          title: "Folyamatos takarítás és időszakos munkák",
-          items: sharedReferences.ongoing
-        },
-        {
-          title: "Gépi padlósúrolás és bevonatolás",
-          items: sharedReferences.flooring
-        }
+      clients: [
+        "Medicover klinika",
+        "Eurings Zrt.",
+        "Techszerviz Kft.",
+        "Strabag Zrt.",
+        "Axiál Kft.",
+        "Novochem Kft.",
+        "DHL Express Logisztikai Központ",
+        "Laguna Lux Fürdőszoba Szalon",
+        "Mitor Kft.",
+        "McDonald's éttermek",
+        "Thyssenkrupp Zrt.",
+        "Plan-Épszer Kft.",
+        "Diósgyőri kórház",
+        "Egyházi rendezvénycsarnok",
+        "Eurings Zrt. Szerszámregeneráló üzem"
       ]
     },
     partnerCompany: {
       kicker: "Kapcsolódó márka",
       title: "TOP-CLEAN 87' Kft.",
       intro:
-        "A TOP-CLEAN 87' Kft. különálló partnerbrandként támogatja a nagyobb vállalati és intézményi projekteket.",
+        "A TOP-CLEAN 87' Kft. különálló partnermárkaként támogatja a nagyobb vállalati és intézményi projekteket.",
       name: "TOP-CLEAN 87' Kft.",
       href: "https://topclean87kft.hu/",
       cta: "TOP-CLEAN oldal megnyitása"
@@ -280,8 +226,10 @@ export const siteContent: Record<Locale, LocaleContent> = {
       kicker: "Kapcsolat",
       title: "Kérjen felmérést vagy ajánlatot közvetlenül a vezetőségtől.",
       intro: "Munkanapokon jellemzően 24 órán belül válaszolunk minden megkeresésre.",
+      pricingNote:
+        "Átlátható árazás ingyenes helyszíni felmérés alapján — kérjen ajánlatot telefonon vagy emailben, munkanapokon jellemzően 24 órán belül válaszolunk.",
       addressLabel: "Cím",
-      address: "4031 Debrecen, Derék utca 128.",
+      address: "4034 Debrecen, Berettyó utca 10/1",
       officeNote: "Személyes ügyfélfogadás nincs.",
       emailLabel: "Email",
       socialLabel: "Közösségi média",
@@ -319,7 +267,6 @@ export const siteContent: Record<Locale, LocaleContent> = {
     nav: [
       { href: "#about", label: "About" },
       { href: "#services", label: "Services" },
-      { href: "#pricing", label: "Pricing" },
       { href: "#references", label: "References" },
       { href: "#contact", label: "Contact" }
     ],
@@ -349,14 +296,11 @@ export const siteContent: Record<Locale, LocaleContent> = {
     heroImages: {
       main: { src: "/images/image11.jpg", alt: "Professional cleaner at work" },
       side: [
-        { src: "/images/image05.jpg", alt: "Floor cleaning machine in use" },
+        { src: "/images/image07.jpg", alt: "Floor cleaning machine in use" },
         { src: "/images/image03.jpg", alt: "Cleaning large windows" }
       ]
     },
-    trustStrip: {
-      kicker: "Trusted by",
-      items: ["healthcare", "industrial halls", "logistics", "office buildings", "retail"]
-    },
+    logoStrip: { kicker: "Trusted by" },
     about: {
       kicker: "About",
       title: "Experience, modern methods and consistent quality control.",
@@ -409,34 +353,26 @@ export const siteContent: Record<Locale, LocaleContent> = {
         }
       ]
     },
-    pricing: {
-      kicker: "Pricing",
-      title: "Indicative pricing with tailored quotes after a site visit.",
-      note: "Contact us by phone or email for a personal survey and a detailed quotation.",
-      serviceHeader: "Service",
-      priceHeader: "Price",
-      rows: [
-        { service: "Deep cleaning", price: "HUF 300 – 1,000 / m²" },
-        { service: "Machine floor scrubbing", price: "From HUF 100 / m²" },
-        { service: "Recurring cleaning", price: "HUF 10 – 100 / m² / day" },
-        { service: "Glass surface cleaning", price: "HUF 80 – 200 / m² / day" },
-        { service: "Floor coating", price: "Subject to individual requirements" },
-        { service: "Facility operations support", price: "Subject to individual requirements" }
-      ]
-    },
     references: {
       kicker: "References",
       title: "Our client list includes healthcare, industrial, logistics and commercial organizations.",
       intro: "Long-term cooperation and repeat assignments remain the clearest proof of our service quality.",
-      groups: [
-        {
-          title: "Recurring cleaning and periodic work",
-          items: sharedReferences.ongoing
-        },
-        {
-          title: "Machine floor scrubbing and floor coating",
-          items: sharedReferences.flooring
-        }
+      clients: [
+        "Medicover clinic",
+        "Eurings Zrt.",
+        "Techszerviz Kft.",
+        "Strabag Zrt.",
+        "Axiál Kft.",
+        "Novochem Kft.",
+        "DHL Express logistics hub",
+        "Laguna Lux bathroom showroom",
+        "Mitor Kft.",
+        "McDonald's restaurants",
+        "Thyssenkrupp Zrt.",
+        "Plan-Épszer Kft.",
+        "Diósgyőri hospital",
+        "Ecclesiastical event hall",
+        "Eurings Zrt. tool regeneration plant"
       ]
     },
     partnerCompany: {
@@ -452,8 +388,10 @@ export const siteContent: Record<Locale, LocaleContent> = {
       kicker: "Contact",
       title: "Request a survey or quotation directly from management.",
       intro: "We typically respond to all enquiries within 24 hours on business days.",
+      pricingNote:
+        "Transparent pricing based on a free on-site survey — reach out by phone or email and we typically reply within 24 hours on weekdays.",
       addressLabel: "Address",
-      address: "4031 Debrecen, Derék utca 128.",
+      address: "4034 Debrecen, Berettyó utca 10/1",
       officeNote: "No in-person customer service.",
       emailLabel: "Email",
       socialLabel: "Social media",

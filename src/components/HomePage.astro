@@ -3,11 +3,10 @@ import type { Locale, LocaleContent } from "../data/site";
 import AboutSection from "./home/AboutSection.astro";
 import ContactSection from "./home/ContactSection.astro";
 import HeroSection from "./home/HeroSection.astro";
+import LogoStrip from "./home/LogoStrip.astro";
 import PartnerSection from "./home/PartnerSection.astro";
-import PricingSection from "./home/PricingSection.astro";
 import ReferencesSection from "./home/ReferencesSection.astro";
 import ServicesSection from "./home/ServicesSection.astro";
-import TrustStrip from "./home/TrustStrip.astro";
 import SiteFooter from "./site/SiteFooter.astro";
 import SiteHeader from "./site/SiteHeader.astro";
 
@@ -23,14 +22,12 @@ const sectionIds =
     ? {
         about: "rolunk",
         services: "szolgaltatasok",
-        pricing: "arak",
         references: "referenciak",
         contact: "kapcsolat"
       }
     : {
         about: "about",
         services: "services",
-        pricing: "pricing",
         references: "references",
         contact: "contact"
       };
@@ -41,10 +38,9 @@ const sectionIds =
 
   <main>
     <HeroSection content={content} servicesId={sectionIds.services} contactId={sectionIds.contact} />
+    <LogoStrip content={content} />
     <ServicesSection content={content} id={sectionIds.services} />
-    <TrustStrip content={content} />
     <AboutSection content={content} id={sectionIds.about} />
-    <PricingSection content={content} id={sectionIds.pricing} />
     <ReferencesSection content={content} id={sectionIds.references} />
     <PartnerSection content={content} />
     <ContactSection content={content} id={sectionIds.contact} />
