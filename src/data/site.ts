@@ -217,7 +217,7 @@ export const siteContent: Record<Locale, LocaleContent> = {
       kicker: "Kapcsolódó márka",
       title: "TOP-CLEAN 87' Kft.",
       intro:
-        "A TOP-CLEAN 87' Kft. különálló partnerbrandként támogatja a nagyobb vállalati és intézményi projekteket.",
+        "A TOP-CLEAN 87' Kft. különálló partnermárkaként támogatja a nagyobb vállalati és intézményi projekteket.",
       name: "TOP-CLEAN 87' Kft.",
       href: "https://topclean87kft.hu/",
       cta: "TOP-CLEAN oldal megnyitása"
@@ -227,9 +227,9 @@ export const siteContent: Record<Locale, LocaleContent> = {
       title: "Kérjen felmérést vagy ajánlatot közvetlenül a vezetőségtől.",
       intro: "Munkanapokon jellemzően 24 órán belül válaszolunk minden megkeresésre.",
       pricingNote:
-        "TODO(hu-copy): átlátható árazás egyeztetés alapján — adaptálásra vár az angol változathoz igazítva.",
+        "Átlátható árazás ingyenes helyszíni felmérés alapján — kérjen ajánlatot telefonon vagy emailben, munkanapokon jellemzően 24 órán belül válaszolunk.",
       addressLabel: "Cím",
-      address: "4031 Debrecen, Derék utca 128.",
+      address: "4034 Debrecen, Berettyó utca 10/1",
       officeNote: "Személyes ügyfélfogadás nincs.",
       emailLabel: "Email",
       socialLabel: "Közösségi média",
@@ -391,7 +391,7 @@ export const siteContent: Record<Locale, LocaleContent> = {
       pricingNote:
         "Transparent pricing based on a free on-site survey — reach out by phone or email and we typically reply within 24 hours on weekdays.",
       addressLabel: "Address",
-      address: "4031 Debrecen, Derék utca 128.",
+      address: "4034 Debrecen, Berettyó utca 10/1",
       officeNote: "No in-person customer service.",
       emailLabel: "Email",
       socialLabel: "Social media",
